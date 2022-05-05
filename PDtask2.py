@@ -110,23 +110,23 @@ if __name__ == '__main__':
     bank_rate = 17.5
     print(f'--Анкета для ипотечного кредитования--\n'
           f'--Ставка ЦБ РФ на момент заполнения заявки составляет {bank_rate} %--\n')
-    region = answer_correction(str(input('Введите регион вашего проживания: ')))
-    city = answer_correction(str(input('Введите город вашего проживания: ')))
-    city_confirmation = str(input('Город проживания совпадает с регистрацией? (да/нет): '))
+    region = answer_correction(input('Введите регион вашего проживания: '))
+    city = answer_correction(input('Введите город вашего проживания: '))
+    city_confirmation = input('Город проживания совпадает с регистрацией? (да/нет): ')
 
-    childs = answer_correction(str(input('У вас есть дети? (да/нет) ')))
+    childs = answer_correction(input('У вас есть дети? (да/нет) '))
     if childs == 'Да':
         children_quantity = int(input('Сколько к вас детей? (цифрой): '))
         if children_quantity > 3:
             bank_rate -= 1
     else:
         children_quantity = 0
-    bank_user = answer_correction(str(input('Являетесь ли вы клиентом банка? (да/нет) ')))
+    bank_user = answer_correction(input('Являетесь ли вы клиентом банка? (да/нет) '))
     if bank_user == 'Да':
-        salary_project = answer_correction(str(input('Зарплатный проект в данном банке? (да/нет) ')))
+        salary_project = answer_correction(input('Зарплатный проект в данном банке? (да/нет) '))
         if salary_project == 'Да':
             bank_rate -= 0.5
-    insurance = answer_correction(str(input('Страхование кредита будет оформленно в данном банке? (да/нет) ')))
+    insurance = answer_correction(input('Страхование кредита будет оформленно в данном банке? (да/нет) '))
     if insurance == 'Да':
         bank_rate -= 1.5
     if region_searching(city, region, far_east_region, far_east_city):
