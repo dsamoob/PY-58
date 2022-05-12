@@ -1,12 +1,10 @@
 def acquaintance(first_list, second_list):
     if len(first_list) == len(second_list):
-        coupling = list(zip(sorted(first_list), sorted(second_list)))
-        for i in coupling:
-            print(f'{i[0]} и {i[1]}')
-        print(f'\n')
+        for i, j in list(zip(sorted(first_list), sorted(second_list))):
+            print(f'{i} и {j}')
     else:
         print(f'Списки разного размера - не получится спарить')
-
+    print(f'\n')
 
 def ingredients_calculation(persons):
     cook_book = [['салат', [
