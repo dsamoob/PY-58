@@ -39,7 +39,7 @@ def ingredients_calculation(persons):
     for i, j in cook_book:
         print('\n', i.capitalize(), sep='')
         for name, volume, gr in j:
-            print(f'{name} {volume * persons} {gr}.')
+            print(f'{name} {volume * persons} {gr}')
 
 
 if __name__ == '__main__':
