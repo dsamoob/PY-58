@@ -39,7 +39,7 @@ def locations(geo_logs):
         del geo_logs[i]
     return geo_logs
 
-
+a = 'bbbb'
 def exceptions(ids):
     x = []
     [[x.append(k) for k in a] for a in ids.values()]
