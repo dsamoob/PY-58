@@ -71,7 +71,7 @@ def list_to_dict(args):
         c.clear()
     return start
 
-1111
+
 def task_number(task):
     print(f'{"-" * 15}Задача № {task}{"-" * 15}')
 
