@@ -26,14 +26,18 @@ queries = [
 
 ]
 stats = {'facebook': 55, 'yandex': 120, 'vk': 115, 'google': 99, 'email': 42, 'ok': 98}
-inc = [['2018-01-01', 'yandex', 'cpc', 100], ['2018-02-02', 'google', 'cpc', 100]]
+inc = ['2018-01-01', 'yandex', 'cpc', 100, '2018-02-02', 'google', 'cpc', 100]
+
+
 def locations(geo_logs):
-    new_geo = []
+    del_list = []
     for i in geo_logs:
         for key, value in i.items():
-            if 'Россия' in value:
-                new_geo.append(i)
-    return new_geo
+            if 'Россия' not in value:
+                del_list.append(geo_logs.index(i))
+    for i in del_list[::-1]:
+        del geo_logs[i]
+    return geo_logs
 
 
 def exceptions(ids):
@@ -47,8 +51,7 @@ def percentage_of_words(queries):
     for i in queries:
         results.append(len(i.split()))
     for i in list(set(results)):
-        print(f'Поисковых запросов из {i} слов {int(results.count(i) / (len(results) / 100))}%')
-
+        print(f'Поисковых запросов из {i} слов {float(results.count(i) / (len(results) / 100))}%')
 
 
 def best_sales(stats):
@@ -60,20 +63,27 @@ def best_sales(stats):
 
 
 def list_to_dict(args):
-    updateddict = {}
-    for i in args:
-        updateddict[i[0]] = {i[1]: {i[2]: i[3]}}
-    return updateddict
+    start = args[len(args)-1]
+    c = {}
+    for i in reversed(range(len(args)-1)):
+        c[args[i]] = start
+        start = c.copy()
+        c.clear()
+    return start
+
+def task_number(task):
+    print(f'{"-" * 15}Задача № {task}{"-" * 15}')
+
 
 
 if __name__ == '__main__':
-    print(f'{"-" * 10} Задача № 1 {"-" * 10}')
+    task_number(1)
     print(locations(geo_logs))
-    print(f'{"-" * 10} Задача № 2 {"-" * 10}')
+    task_number(2)
     print(exceptions(ids))
-    print(f'{"-" * 10} Задача № 3 {"-" * 10}')
+    task_number(3)
     percentage_of_words(queries)
-    print(f'{"-" * 10} Задача № 4 {"-" * 10}')
+    task_number(4)
     print(best_sales(stats))
-    print(f'{"-" * 10} Задача № 5 {"-" * 10}')
+    task_number(5)
     print(list_to_dict(inc))
