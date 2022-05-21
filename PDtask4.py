@@ -55,11 +55,12 @@ def percentage_of_words(queries):
 
 
 def best_sales(stats):
-    for i, k in stats.items():
-        if k == max(stats.values()):
-            return i
-    else:
-        return 'Нету лучших'
+    return max(stats, key=stats.get)
+    # for i, k in stats.items():
+    #     if k == max(stats.values()):
+    #         return i
+    # else:
+    #     return 'Нету лучших'
 
 
 def list_to_dict(args):
