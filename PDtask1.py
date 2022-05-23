@@ -12,3 +12,4 @@ life_percentage = float(input('Введите, какой процент(%) ух
 print(f'\nВывод:\n'
       f'На ипотеку было потрачено: {int((salary * 12 / 100) * flat_percentage)}\n'
       f'Было накоплено: {int(salary * 12 - ((salary * 12 / 100) * (flat_percentage + life_percentage)))}')
+
