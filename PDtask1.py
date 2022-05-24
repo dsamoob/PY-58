@@ -1,6 +1,6 @@
 square = int(input('Введите длинну стороны квадрата: '))
-print(f'\nВывод:\nПериметр: {square * 4}\nПлощадь: {square * square}')
-print()
+print(f'\nВывод:\nПериметр: {square * 4}\nПлощадь: {square * square}\n')
+
 rect_length = int(input('Введите длинну прямоугольника: '))
 rect_width = int(input('Введите ширину прямоугольника: '))
 print(f'\nВывод:\nПериметр: {(rect_length * 2) + (rect_width * 2)}\nПлощадь: {rect_length * rect_width}')
