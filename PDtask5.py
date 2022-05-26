@@ -15,6 +15,7 @@ menu = {'p': 'Поиск владельца по номеру документа
         'd': 'Удаление документа',
         'm': 'Переместить докуменет на другую полку',
         'as': 'Добавление новой полки',
+        'menu': 'Вызов меню',
         'ex': 'Завершение работы программы'
         }
 
@@ -41,14 +42,12 @@ def name_by_doc(documents):
                 print(doc['name'])
                 if input('Найти что-либо еще? ').lower() in positive_answers:
                     name_by_doc(documents)
-                    return 'menu'
-                return 'menu'
+                pass
     else:
         print(f'Документа с номером {doc_number} нет в списке.')
         if input('Попробовать еще раз? ').lower() in positive_answers:
             name_by_doc(documents)
-            return 'menu'
-        return 'menu'
+        pass
 
 
 def check_shelf(documents, directories):
@@ -60,8 +59,7 @@ def check_shelf(documents, directories):
                     print(f'Документ № {doc_number} находится на полке № {value}')
                     if input('Проверить еще документ? ').lower() in positive_answers:
                         check_shelf(documents, directories)
-                        return 'menu'
-                    return 'menu'
+                    pass
         else:
             print(f'Документ № {doc_number} есть базе, но он не размещен на полке')
             request = input('Поместить документ на полку? ').lower()
@@ -72,16 +70,14 @@ def check_shelf(documents, directories):
                     print(f'Документ № {doc_number} размещен на полке {shelf_number}')
                     if input('Проверить еще документ? ').lower() in positive_answers:
                         check_shelf(documents, directories)
-                        return 'menu'
-                    return 'menu'
                 else:
-                    print('Данной полки нет в списке полок, она будет добавленная автоматически')
-                    directories[shelf_number] = [doc_number]
-                    print(f'Документ № {doc_number} размещен на полке {shelf_number}')
+                    if input('Данной полки нет в списке полок, добавить? ') in positive_answers():
+                        directories[shelf_number] = [doc_number]
+                        print(f'Документ № {doc_number} размещен на полке {shelf_number}')
+                    pass
                     if input('Проверить еще документ? ').lower() in positive_answers:
                         check_shelf(documents, directories)
-                        return 'menu'
-                    return 'menu'
+                    pass
     else:
         for shelf_number in directories:
             if doc_number in directories[shelf_number]:
@@ -90,7 +86,7 @@ def check_shelf(documents, directories):
                 directories[shelf_number].remove(doc_number)
                 print(f'Документ № {doc_number} удален с полки {shelf_number}')
                 add_document(documents, directories)
-                return 'menu'
+        print('Данного документа нет в базе')
 
 
 def add_document(documents, directories):
@@ -106,15 +102,15 @@ def add_document(documents, directories):
                 print(f'{doc_type}№ {doc_number} добавлен в базу и размещен на полке {shelf_number}')
                 if input('Добавить еще документ? ').lower() in positive_answers:
                     add_document(documents, directories)
-                    return 'menu'
-                return 'menu'
+                pass
             else:
-                directories[shelf_number] = [doc_number]
-                print(f'{doc_type}№ {doc_number} добавлен в базу и размещен на полке {shelf_number}')
+                if input('Указанной Вами полки нет в базе, добавить эту полку? ') in positive_answers:
+                    directories[shelf_number] = [doc_number]
+                    print(f'{doc_type}№ {doc_number} добавлен в базу и размещен на полке {shelf_number}')
+                pass
                 if input('Добавить еще документ? ').lower() in positive_answers:
                     add_document(documents, directories)
-                    return 'menu'
-                return 'menu'
+                pass
     else:
         if not any(doc_number in shelf for shelf in directories.values()):
             print(f'Документ под номером {doc_number} уже зарегистрирован, но не размещен на полке')
@@ -125,28 +121,23 @@ def add_document(documents, directories):
                     print(f'{doc_type}№ {doc_number} добавлен в базу и размещен на полке {shelf_number}')
                     if input('Добавить еще документ? ').lower() in positive_answers:
                         add_document(documents, directories)
-                        return 'menu'
-                    return 'menu'
+                    pass
                 else:
                     directories[shelf_number] = [doc_number]
                     print(f'Полки №{shelf_number} нет в базе, она будет добавлена автоматически')
                     print(f'{doc_type}№ {doc_number} добавлен в базу и размещен на полке {shelf_number}')
                     if input('Добавить еще документ? ').lower() in positive_answers:
                         add_document(documents, directories)
-                        return 'menu'
-                    return 'menu'
-            return 'menu'
+                    pass
         else:
             for value in directories:
                 if doc_number in directories[value]:
                     print(f'Документ № {doc_number} уже есть в базе находится на полке № {value}')
-                    return 'menu'
 
 
 def list_all_docs(documents):
     for doc in documents:
         print(f'{doc["type"]} "{doc["number"]}" "{doc["name"]}"', )
-    return 'menu'
 
 
 def delete_document(documents, directories):
@@ -162,14 +153,12 @@ def delete_document(documents, directories):
                     print(f'Документ № {doc_number} удален с полки {shelf_number} и из базы')
                     if input('Еще удалить? ').lower() in positive_answers:
                         delete_document(documents, directories)
-                        return 'menu'
-                    return 'menu'
+                    pass
     else:
         print(f'Документа {doc_number} нет в базе')
         if input('Попробовать еще раз? ').lower() in positive_answers:
             delete_document(documents, directories)
-            return 'menu'
-        return 'menu'
+        pass
 
 
 def moving_document(directions):
@@ -184,8 +173,7 @@ def moving_document(directions):
                     print(f'Документ № {doc_number} перемещен.')
                     if input('Переместить другой документ?') in positive_answers:
                         moving_document(directions)
-                        return 'menu'
-                    return 'menu'
+                    pass
         else:
             for shelf, doc in directories.items():
                 if doc_number in doc:
@@ -194,17 +182,14 @@ def moving_document(directions):
                     print(f'Документ № {doc_number} перемещен.')
                     if input('Переместить другой документ?') in positive_answers:
                         moving_document(directions)
-                        return 'menu'
-                    return 'menu'
+                    pass
     else:
         print(f'Документа с номером {doc_number} нет на полках')
         if input('Добавить данный дкоумент? ') in positive_answers:
             add_document(documents, directions)
-            return 'menu'
         if input('Попробовать еще раз?') in positive_answers:
             moving_document(directions)
-            return 'menu'
-        return 'menu'
+        pass
 
 
 def add_shelf(directories):
@@ -213,34 +198,39 @@ def add_shelf(directories):
         print(f'Полка № {new_shelf} уже есть')
         if input('Добавить другую полку?').lower() in positive_answers:
             add_shelf(directories)
-            return 'menu'
-        return 'menu'
+        pass
     else:
         directories[new_shelf] = []
         print(f'Полка № {new_shelf} добавлена')
         if input('Добавить другую полку?').lower() in positive_answers:
             add_shelf(directories)
-            return 'menu'
-        return 'menu'
+        pass
 
 
-result = 'menu'
+result = menu_list(menu)
 while result != 'ex':
-    if result == 'menu':
-        result = menu_list(menu)
-    elif result == 'p':
-        result = name_by_doc(documents)
+    if result == 'p':
+        name_by_doc(documents)
+        result = input('Введите команду ')
     elif result == 's':
-        result = check_shelf(documents, directories)
+        check_shelf(documents, directories)
+        result = input('Введите команду ')
     elif result == 'l':
-        result = list_all_docs(documents)
+        list_all_docs(documents)
+        result = input('Введите команду ')
     elif result == 'a':
-        result = add_document(documents, directories)
+        add_document(documents, directories)
+        result = input('Введите команду ')
     elif result == 'd':
-        result = delete_document(documents, directories)
+        delete_document(documents, directories)
+        result = input('Введите команду ')
     elif result == 'm':
-        result = moving_document(directories)
+        moving_document(directories)
+        result = input('Введите команду ')
     elif result == 'as':
-        result = add_shelf(directories)
+        add_shelf(directories)
+        result = input('Введите команду ')
+    elif result == 'menu':
+        result = menu_list(menu)
 else:
     print('bye bye')
