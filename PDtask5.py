@@ -77,7 +77,7 @@ def check_shelf(documents, directories):
             directories[new_shelf].remove(doc_number)
             print(f'Документ № {doc_number} удален с полки {shelf_number}')
             add_document(documents, directories)
-        print('Данного документа нет в базе')
+
     if input('Проверить еще документ? ').lower() in positive_answers:
         check_shelf(documents, directories)
 
