@@ -24,7 +24,10 @@ class Student:
         if not isinstance(other, Lecturer):
             print('Плохой кандидат для сравнения')
             return
-        return self.middle_grade_stud() > other.middle_grade_lect()
+        if self.middle_grade_stud() > other.middle_grade_lect():
+            return f'{self.name} круче чем {other.name}'
+        else:
+            return f'{self.name} не круче чем {other.name}'
 
     def middle_grade_stud(self):  # Данный метод сделан для селфа и используется в str
         middle = (sum([sum(i) for i in list(self.act_courses.values())]) + sum(
@@ -108,15 +111,20 @@ class Lecturer(Mentor):
         middle = self.middle_grade_lect()  # по аналогии с методом в Student
         return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {middle}'
 
-    def middle_grade_lect(self):
-        middle = sum([sum(i) for i in self.grades.values()]) / len([len(i) for i in self.grades.values()])
-        return middle
+    def middle_grade_lect(self):  # Исправил вычисление средней.
+        middle = sum([sum(i) for i in self.grades.values()])
+        m2 = []
+        [[m2.append(i) for i in b] for b in self.grades.values()]
+        return middle / len(m2)
 
     def __lt__(self, other):
         if not isinstance(other, Student):
             print('Плохой кандидат для сравнения')
             return
-        return self.middle_grade_lect() > other.middle_grade_stud()
+        if self.middle_grade_lect() > other.middle_grade_stud():
+            return f'{self.name} круче чем {other.name}'
+        else:
+            return f'{other.name} круче чем {self.name}'
 
     def add_course(self, course):
         course = course.capitalize()
@@ -136,6 +144,7 @@ class Lecturer(Mentor):
             marks_sum = 0
             for mark in range(1, len(Lecturer.lect_courses[course]), 2):
                 marks_quantity += len(Lecturer.lect_courses[course][mark])
+
                 marks_sum += sum(Lecturer.lect_courses[course][mark])
             if marks_quantity != 0:
                 print(f'Средний бал среди всех лекторов по курсу {course} {marks_sum / marks_quantity}')
@@ -227,7 +236,7 @@ if __name__ == '__main__':
     # print(st2)
     # print(st3)
     # print(st1)
-    # st1.finish_course('Python')
+    st1.finish_course('Python')  # Для сравнения результата
     # print(st1)  # Показывает среднюю оценку по дз за текущие курсы и за те, которые завершил
     # print(th1)
     # print(th3)
@@ -248,8 +257,9 @@ if __name__ == '__main__':
     # print(Lecturer.lect_list)  # Простой список лекторов
     # print(Reviewer.rev_courses)  # Список ревьюеров по курсам и с оценками, с оценками, которые они проставляли
     # print(Reviewer.rev_list)  # Простой список ревьеров
+    # print(th3.grades)
     # print(st3.middle_grade_stud()) # средние оценки у студента
-    # print(th3.middle_grade_lect())  #  Используется логика средней на курсы (1 оценка по с++ -6 и нет оценок по гиту = 3
+    print(th3.middle_grade_lect())  #  Используется логика средней на курсы (1 оценка по с++ -6 и нет оценок по гиту итого 3
     # print(th1.__lt__(st3))  # сравниваем одних и тех-же
-    # print(st3.__lt__(th1))  # сравниваем одних и тех-же
+    # print(st3.__lt__(th1)) # сравниваем одних и тех-же
 
