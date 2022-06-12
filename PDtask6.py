@@ -147,7 +147,7 @@ class Lecturer(Mentor):
 
                 marks_sum += sum(Lecturer.lect_courses[course][mark])
             if marks_quantity != 0:
-                print(f'Средний бал среди всех лекторов по курсу {course}: {marks_sum / marks_quantity}')
+                print(f'Средний бал среди всех лекторов по курсу {course} {marks_sum / marks_quantity}')
             else:
                 print('Нет оценок')
         else:
@@ -230,13 +230,13 @@ if __name__ == '__main__':
     st1.mark_to_lecturer(th1, 'Python', 4)  # Оценка лектора по питону
     st1.mark_to_lecturer(th4, 'Java', 3)  # Оценка лектора по джаве
     st2.mark_to_lecturer(th3, 'C++', 6)  # Оценка лектора по С++
-    st1.mark_to_lecturer(th4, 'Python', 3)  # Оценка лектора по питону (лектору был добавлен доп курс
 
+    st1.mark_to_lecturer(th4, 'Python', 3)  # Оценка лектора по питону (лектору был добавлен доп курс
     # Проверка __str__
     # print(st2)
     # print(st3)
     # print(st1)
-    # st1.finish_course('Python')  # Для сравнения результата
+    st1.finish_course('Python')  # Для сравнения результата
     # print(st1)  # Показывает среднюю оценку по дз за текущие курсы и за те, которые завершил
     # print(th1)
     # print(th3)
@@ -259,7 +259,7 @@ if __name__ == '__main__':
     # print(Reviewer.rev_list)  # Простой список ревьеров
     # print(th3.grades)
     # print(st3.middle_grade_stud()) # средние оценки у студента
-    # print(th3.middle_grade_lect())  #  Используется логика средней на курсы (1 оценка по с++ -6 и нет оценок по гиту итого 3
+    print(th3.middle_grade_lect())  #  Используется логика средней на курсы (1 оценка по с++ -6 и нет оценок по гиту итого 3
     # print(th1.__lt__(st3))  # сравниваем одних и тех-же
     # print(st3.__lt__(th1)) # сравниваем одних и тех-же
 
