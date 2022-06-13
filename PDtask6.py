@@ -60,7 +60,7 @@ class Student:
             if course in lecturer.courses and course in Lecturer.courses:
                 lecturer.courses[course].append(grade)
                 Lecturer.courses[course][list(Lecturer.courses[course]).index(f'{lecturer.name} {lecturer.surname}') + 1].append(grade)
-                print(f'Студент {self.name} поставил лектору {lecturer.name} {grade} по предмету {course}')
+                return f'Студент {self.name} поставил лектору {lecturer.name} {grade} по предмету {course}'
             else:
                 return f'Преподаватель {lecturer.name} {lecturer.surname} не относится к курсу {course}'
         else:
@@ -128,7 +128,7 @@ class Lecturer(Mentor):
             Lecturer.courses[course].append([])
 
 
-class Reviewer(Mentor): # e
+class Reviewer(Mentor):
     courses = {}
     list = []
 
@@ -165,9 +165,9 @@ class Reviewer(Mentor): # e
                 self.courses[course].append(f'{student.name} {student.surname}')
                 self.courses[course].append([])
                 self.courses[course][self.courses[course].index(f'{student.name} {student.surname}')+1].append(grade)
-                print(f'Лектор {self.name} поставил студенту {student.name} {grade} по предмету {course}')
+                return f'Лектор {self.name} поставил студенту {student.name} {grade} по предмету {course}'
             else:
-                return 'Несоответствие курсов'  # все принты поменял на return
+                return 'Несоответствие курсов'
         else:
             return 'Несоответствие курсов'
 
@@ -219,19 +219,19 @@ if __name__ == '__main__':
     r5 = Reviewer('Alexandr', 'Baykov', 'Java')
 
     # testing
-    r1.grade_to_student(st1, 'Python', 5)  # оценка студента 1 по питону + проверка capitalize()
-    r1.grade_to_student(st4, 'Python', 8)  # Оценка студента 4 по питону
-    r2.grade_to_student(st1, 'Python', 4)  # Оценка студена 1 по питону
-    r2.grade_to_student(st4, 'Python', 7)
-    r3.grade_to_student(st2, 'C++', 7)  # Оценка студента 2 по С++
-    r4.grade_to_student(st1, 'Java', 3)  # Оценка студента 2 по Java
+    print(r1.grade_to_student(st1, 'Python', 5))  # оценка студента 1 по питону + проверка capitalize()
+    print(r1.grade_to_student(st4, 'Python', 8))  # Оценка студента 4 по питону
+    print(r2.grade_to_student(st1, 'Python', 4))  # Оценка студена 1 по питону
+    print(r2.grade_to_student(st4, 'Python', 7))
+    print(r3.grade_to_student(st2, 'C++', 7))  # Оценка студента 2 по С++
+    print(r4.grade_to_student(st1, 'Java', 3))  # Оценка студента 2 по Java
 
-    st1.grade_to_lecturer(th1, 'Python', 4)  # Оценка лектора по питону
-    st1.grade_to_lecturer(th4, 'Java', 3)  # Оценка лектора по джаве
-    st1.grade_to_lecturer(th4, 'Python', 3)  # Оценка лектора по питону (лектору был добавлен доп курс
-    st2.grade_to_lecturer(th3, 'C++', 6)  # Оценка лектора по С++
-    st3.grade_to_lecturer(th3, 'Git', 7)
-    st4.grade_to_lecturer(th2, 'python', 5)
+    print(st1.grade_to_lecturer(th1, 'Python', 4))  # Оценка лектора по питону
+    print(st1.grade_to_lecturer(th4, 'Java', 3))  # Оценка лектора по джаве
+    print(st1.grade_to_lecturer(th4, 'Python', 3))  # Оценка лектора по питону (лектору был добавлен доп курс
+    print(st2.grade_to_lecturer(th3, 'C++', 6))  # Оценка лектора по С++
+    print(st3.grade_to_lecturer(th3, 'Git', 7))
+    print(st4.grade_to_lecturer(th2, 'python', 5))
 
     # Проверка __str__
     # print(st2)
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     # print(th1.middle_grade_lect())  # средняя оценка у лектора
     # print(th2.middle_grade_lect())  # средняя оценка у лектора
     # print(th3.middle_grade_lect())  # средняя оценка у лектора
-    # print(th4.middle_grade_lect())  # средняя оценка у лектора
+    print(th4.middle_grade_lect())  # средняя оценка у лектора
     # print(th1.__lt__(st3))  # сравниваем одних и тех-же
     # print(st3.__lt__(th1)) # сравниваем одних и тех-же
     # print(st2.__lt__(th1))  # сравниваем одних и тех-же
