@@ -13,9 +13,11 @@ class Student:
         middle = self.middle_grade_stud()  # использует метод от self
         act_courses = [i for i in self.act_courses]
         finished = self.finished
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {middle}\n' \
-               f'Курсы в процессе обучения: {", ".join([str(x) for x in [*act_courses]])}\nЗавершенные курсы:  ' \
-               f'{", ".join([str(x) for x in [*finished]])}'  # есть еще вариант распаковки списка в ф - str(finished)[1:-2]
+        return f'Имя: {self.name}\nФамилия: {self.surname}\n' \
+               f'Средняя оценка за домашние задания: {middle}\n' \
+               f'Курсы в процессе обучения: {", ".join([str(x) for x in [*act_courses]])}\n' \
+               f'Завершенные курсы:  ' \
+               f'{", ".join([str(x) for x in [*finished]])}'
 
     def __lt__(self, other):
         if not isinstance(other, Lecturer):
@@ -29,7 +31,8 @@ class Student:
         return f'{self.name} круче чем {other.name}'
 
     def middle_grade_stud(self):  # Исправил порядок расчета средней т.к. в предыдущей версии путой список считался бы как за 0
-        middle = sum([sum(i) for i in list(self.act_courses.values())]) + sum([sum(i) for i in list(self.finished.values())])
+        middle = sum([sum(i) for i in list(self.act_courses.values())]) + \
+                 sum([sum(i) for i in list(self.finished.values())])
         m2 = []
         [[m2.append(i) for i in b] for b in self.act_courses.values()]
         if len(m2) != 0:
