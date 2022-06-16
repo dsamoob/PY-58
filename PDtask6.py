@@ -1,3 +1,4 @@
+
 class Student:
     list = []  # Список студентов по всему классу
     courses = {}  # Словарь из студентов с расстановкой "Язык": [имя и фамилия студента, [оценки], ....etc]
@@ -193,7 +194,7 @@ def middle_grade(group, course):  # Функция для средних оце�
 
 if __name__ == '__main__':
     # students registration
-    st1 = Student('Ruoy', 'Eman')
+    st1 = Student( 'Ruoy', 'Eman')
     st2 = Student('Bobby', 'Dilan')
     st3 = Student('Nikolay', 'Krog')
     st4 = Student('Gleb', 'Trofimov')
