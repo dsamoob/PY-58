@@ -40,7 +40,7 @@ def shop_list_by_dishes(dishes: list, person_count: int, cook_book: dict) -> dic
 
 def rewriting(file_for_writing: str, base_path, location):
     files = [[strings_counting(os.path.join(base_path, location, i)), os.path.join(base_path, location, i), i]
-             for i in list(os.listdir(base_path + '/' + location))]
+             for i in list(os.listdir(os.path.join(base_path, location)))]
     for file_from_list in sorted(files):
         w_to = open(file_for_writing, 'a')
         w_to.write(f'{file_from_list[2]}\n')
