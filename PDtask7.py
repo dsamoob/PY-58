@@ -34,7 +34,6 @@ def shop_list_by_dishes(dishes: list, person_count: int, cook_book: dict) -> dic
                                                           'quantity': (consist['quantity'] * person_count)}
         else:
             print(f'Блюда "{dish}" нет в книге рецептов')
-            pass
     return result
 
 
