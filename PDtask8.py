@@ -1,6 +1,5 @@
 import requests
 from pprint import pprint
-import json
 from YandexDisk import YandexDisk
 
 
@@ -17,20 +16,20 @@ def heroes_checking(url, heroes_list:list):
 
 
 if __name__ == '__main__':
-    TOKEN =
     heroes_url = "https://akabab.github.io/superhero-api/api/all.json"
     heroes_list = ['Hulk', 'Captain America', 'Thanos']
     print(heroes_checking(heroes_url, heroes_list))
 
+    TOKEN = ''
+    file_name = ''
+    disk_file_path = ''
+    new_directory_name = ''
+    file_name_for_deleting = ''
     ya = YandexDisk(token=TOKEN)
-    ya.upload_file_to_disk(disk_file_path="/123/text.xls",
-                           filename="/Users/egorbelov/GitHub/PY-58/dif_files/Recipe.txt")
-    headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'OAuth {TOKEN}'
-        }
-    ya.make_new_directory('ubunthu')
+
     pprint(ya.get_files_list())
-    ya.delete_file('Recipe3.txt')
+    ya.upload_file_to_disk(disk_file_path=disk_file_path, filename=file_name)
+    ya.make_new_directory(new_directory_name=new_directory_name)
+    ya.delete_file(file_name_for_deleting=file_name_for_deleting)
 
 
