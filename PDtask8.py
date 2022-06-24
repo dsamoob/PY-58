@@ -4,7 +4,6 @@ import json
 from YandexDisk import YandexDisk
 
 
-
 def heroes_checking(url, heroes_list:list):
     response = requests.get(url).json()
     best_hero = ''
