@@ -1,7 +1,7 @@
 import requests
 from pprint import pprint
 from YandexDisk import YandexDisk
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 
 def heroes_checking(url, heroes_list: list):
@@ -17,10 +17,7 @@ def heroes_checking(url, heroes_list: list):
 
 
 def stack_overflow_questions(language: str) -> dict:
-    a = str(datetime.today())[:10].split('-')
-    d_start = date(1970, 1, 1)
-    d_today = date(int(a[0]), int(a[1]), int(a[2]))
-    d_result = (d_today - d_start).days * 86400 - 172800
+    d_result = (int((datetime.today() - timedelta(days=2)).timestamp()))
     result = {}
     counting = 1
     for page_number in range(1, 50):
